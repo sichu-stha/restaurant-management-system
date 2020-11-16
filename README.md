@@ -1,7 +1,7 @@
 # RestaurantManagementSystem
 Login Creds:
-Username: admin
-Password: password
+# Username: admin
+# Password: password
 
 ## Development server
 
