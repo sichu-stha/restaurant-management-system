@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <h3>Orders & Payments</h3>
+    <div class="col-lg-12 col-sm-12 col-xs-12 alert alert-info message">
+         Please click the '+' sign of the rows to view order details
+    </div>
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <kendo-grid
+        [data]="orders"
+        [pageSize]="10"
+        [sortable]="true"
+        [pageable]="true"
+        [navigable]="true"
+      >
+      <kendo-grid-column field="id" title="Order Id" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="billAmount" title="Grand Total"></kendo-grid-column>
+      <kendo-grid-column field="orderDate" title="Date"></kendo-grid-column>
+      <kendo-grid-column field="user.userName" title="Order Taken By"></kendo-grid-column>
+      <div *kendoGridDetailTemplate="let dataItem">
+          <app-order [orderId]="dataItem.id"></app-order>
+      </div>
+    </kendo-grid>
+    </div>
+</div>

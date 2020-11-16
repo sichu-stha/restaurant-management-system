@@ -1,0 +1,69 @@
+<div class="container mt-3">
+    <h3>Menu</h3>
+    <div class="row">
+      <div class="col-lg-9 col-sm-6 col-xs-9 d-flex flex-column align-items-end">
+        <span class="total">Grand Total: Rs. {{getTotalBill()}}</span>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-xs-3 d-flex flex-column">
+        <button class="btn btn-success pay-now mt-3 px-5 py-2" data-toggle="modal" data-target="#paymentConfirmationModal" type="button" [disabled]="noOrders()" (click)="populateBill()">Pay Now !</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12 d-flex flex-column align-items-center">
+        <kendo-grid
+            [kendoGridBinding]="items"
+            [pageSize]="5"
+            [pageable]="true"
+            [sortable]="true"
+            [filterable]="true"
+            >
+            <kendo-grid-column title="S.N" [filterable]="false" [columnMenu]="false" [width]="50">
+              <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                {{rowIndex+1}}
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="itemName" title="NAME"></kendo-grid-column>
+            <kendo-grid-column field="price" title="PRICE" [filterable]="false" [columnMenu]="false"></kendo-grid-column>
+            <kendo-grid-column title="QUANTITY" [filterable]="false" [columnMenu]="false">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span class="btn btn-danger mr-2" (click)="removeItem(dataItem)">-</span>{{getQuantity(dataItem)}} <span class="btn btn-success ml-2" (click)="addItemFromMenu(dataItem)">+</span>
+              </ng-template>
+            </kendo-grid-column>        
+          </kendo-grid>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="paymentConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="paymentConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentConfirmationModalLabel">Proceed to Pay</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>Do you want to confirm your order of Rs. {{getTotalBill()}} ?</div>
+          <div>
+            <kendo-grid
+            [kendoGridBinding]="orderList"
+            >
+              <kendo-grid-column title="S.N">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                 {{rowIndex+1}}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="item.itemName" title="Name"></kendo-grid-column> 
+              <kendo-grid-column field="quantity" title="Qty"></kendo-grid-column>  
+              <kendo-grid-column field="totalPrice" title="Total"></kendo-grid-column>          
+            </kendo-grid>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="makePayment()">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>

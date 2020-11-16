@@ -1,0 +1,20 @@
+<div *ngIf="order" class="container mt-3">
+    <div class="d-flex justify-content-center mb-3">Order Details</div>
+    <div class="col-lg-12 col-sm-12 col-xs-12 d-flex flex-column align-items-center">
+        <kendo-grid
+        [kendoGridBinding]="order.itemOrder"
+        [pageSize]="5"
+        [pageable]="true"
+        >
+            <kendo-grid-column title="S.N" [width]="40" [headerStyle]="{'font-size': '10px'}" [style]="{'font-size': '10px'}" >
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                {{rowIndex+1}}
+            </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="item.itemName" title="Item Name" [headerStyle]="{'font-size': '10px'}" [style]="{'font-size': '10px'}"></kendo-grid-column>
+            <kendo-grid-column field="item.price" title="Price" [headerStyle]="{'font-size': '10px'}" [style]="{'font-size': '10px'}"></kendo-grid-column>
+            <kendo-grid-column field="quantity"  title="Quantity" [headerStyle]="{'font-size': '10px'}" [style]="{'font-size': '10px'}"></kendo-grid-column>
+            <kendo-grid-column field="totalPrice" title="Amount" [headerStyle]="{'font-size': '10px'}" [style]="{'font-size': '10px'}"></kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>

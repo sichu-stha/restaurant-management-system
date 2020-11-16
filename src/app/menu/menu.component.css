@@ -1,0 +1,16 @@
+td {
+    vertical-align: middle;
+}
+
+.total {
+    padding-top: 33px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+
+.pay-now{
+    max-width: 220px;
+    margin-bottom: 20px;
+}
+
